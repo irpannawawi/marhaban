@@ -37,20 +37,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($bahans as $bahan)
                                             <tr>
-                                                <td>{{ $bahan->id_bahan }}</td>
-                                                <td>{{ $bahan->created_at }}</td>
-                                                <td>{{ $bahan->nama_bahan }}</td>
+                                                <td>{{ 1 }}</td>
+                                                <td>07-01-2024 08:00</td>
+                                                <td>Terigu</td>
                                                 <td>20 Kg</td>
                                                 <td>Masuk <i class="fa fa-arrow-down text-success"></i></td>
                                                 <td>
                                                     <button class="btn btn-sm btn-primary">Edit</button>
-                                                    <a href="{{ route('bahan.destroy', ['id'=>$bahan->id_bahan]) }}"
+                                                    <a href=""
                                                         class="btn btn-sm btn-danger">Delete</a>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                            <tr>
+                                                <td>{{ 2 }}</td>
+                                                <td>07-01-2024 08:00</td>
+                                                <td>Gula</td>
+                                                <td>20 Kg</td>
+                                                <td>Keluar <i class="fa fa-arrow-down text-success"></i></td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                                    <a href=""
+                                                        class="btn btn-sm btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
                                     </tbody>
                                 </table>
                             </div>
