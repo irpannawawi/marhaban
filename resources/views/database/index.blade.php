@@ -19,7 +19,8 @@
                                         </h3>
                                     </div>
                                     <div class="p-1">
-                                        <button class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modalAddBahanBaku">Tambah</button>
+                                        <button class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                            data-bs-target="#modalAddBahanBaku">Tambah</button>
                                     </div>
                                 </div>
                             </div>
@@ -36,17 +37,17 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($bahans as $bahan)
-                                            
-                                        <tr>
-                                            <td>{{$bahan->id}}</td>
-                                            <td>{{$bahan->nama_bahan}}</td>
-                                            <td>{{$bahan->stok_bahan}}</td>
-                                            <td>{{$bahan->satuan_bahan}}</td>
-                                            <td>
-                                                <button class="btn btn-sm btn-primary">Edit</button>
-                                                <button class="btn btn-sm btn-danger">Delete</button>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{ $bahan->id }}</td>
+                                                <td>{{ $bahan->nama_bahan }}</td>
+                                                <td>{{ $bahan->stok_bahan }}</td>
+                                                <td>{{ $bahan->satuan_bahan }}</td>
+                                                <td>
+                                                    <button class="btn btn-sm btn-primary">Edit</button>
+                                                    <a href="{{ route('bahan.destroy', ['id'=>$bahan->id_bahan]) }}"
+                                                        class="btn btn-sm btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -63,7 +64,8 @@
                                         </h3>
                                     </div>
                                     <div class="p-1">
-                                        <button class="btn btn-primary btn-sm " data-bs-toggle="modal" data-bs-target="#modalAddProduk">Tambah</button>
+                                        <button class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                            data-bs-target="#modalAddProduk">Tambah</button>
                                     </div>
                                 </div>
                             </div>
@@ -91,8 +93,8 @@
     {{-- Modals --}}
 
     {{-- add bahan baku --}}
-    <div class="modal fade" id="modalAddBahanBaku" tabindex="-1" role="dialog" aria-labelledby="modalAddBahanBakuLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="modalAddBahanBaku" tabindex="-1" role="dialog"
+        aria-labelledby="modalAddBahanBakuLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -101,9 +103,9 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('bahan.store')}}" method="post">
+                <form action="{{ route('bahan.store') }}" method="post">
                     @csrf
-                <div class="modal-body">
+                    <div class="modal-body">
                         <div class="form-group">
                             <label for="nama_bahan">Nama Bahan</label>
                             <input type="text" class="form-control" id="nama_bahan" name="nama_bahan">
@@ -116,12 +118,12 @@
                             <label for="satuan_bahan">Satuan Bahan</label>
                             <input type="text" class="form-control" id="satuan_bahan" name="satuan_bahan">
                         </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
-                </div>
-            </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
 
             </div>
         </div>
