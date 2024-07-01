@@ -10,9 +10,9 @@ class BahanBakuController extends Controller
 
     public function index()
     {
-        $bahanBaku = Bahan::all();
+        $bahans= Bahan::all();
 
-        return $bahanBaku->toJson();
+        return view('transaksi_bahan_baku.index', compact('bahans'));
     }
 
     public function store(Request $request)

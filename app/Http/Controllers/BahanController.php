@@ -10,9 +10,9 @@ class BahanController extends Controller
     
     public function index()
     {
-        $bahans = Bahan::all();
+        $bahans= Bahan::all();
 
-        return view('bahan.index', compact('bahans'));
+        return view('transaksi_bahan_baku.index', compact('bahans'));
     }
 
     public function create()
