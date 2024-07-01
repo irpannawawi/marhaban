@@ -24,7 +24,7 @@ class BahanController extends Controller
     {
         $bahan = Bahan::create($request->all());
 
-        return redirect()->route('bahan.index')->with('success', 'Bahan berhasil ditambahkan');
+        return redirect()->route('database')->with('success', 'Bahan berhasil ditambahkan');
     }
 
     public function edit(Bahan $bahan)

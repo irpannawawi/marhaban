@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bahan;
 use Illuminate\Http\Request;
 
 class DatabaseController extends Controller
 {
     public function index()
     {
-        return view('database');
+        $bahans = Bahan::all();
+        return view('database.index', compact('bahans'));
     }
     
 }
