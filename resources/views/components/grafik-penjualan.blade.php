@@ -27,13 +27,13 @@
             name: 'sales',
             data: [
                 {
-                    x: 'Apple',
+                    x: 'Gula',
                     y: 150
                 },{
-                    x: 'Orange',
+                    x: 'Terigu',
                     y: 40
                 },{
-                    x: 'Pineapple',
+                    x: 'Mentega',
                     y: 50
                 }
             ]

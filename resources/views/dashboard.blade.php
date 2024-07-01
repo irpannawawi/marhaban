@@ -12,10 +12,10 @@
                     <div class="col-6">
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h3>AI Advice</h3>
+                                <h3>Saran AI</h3>
                             </div>
                             <div class="card-body">
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus placeat suscipit, eaque quisquam, ratione iste nostrum, libero consectetur amet ducimus laboriosam. Nostrum quis quasi repellendus? Eligendi ipsum tempore adipisci fugit?</p>
+                                <p>Penjualan Anda terlihat bagus belakangan ini. Tingkatkan stok bahan baku terigu sebesar 20% dan gula sebesar 30%. Penggunaan stok meningkat, jadi pastikan persediaan cukup untuk memenuhi permintaan yang terus bertambah. Dengan langkah ini, kita dapat memastikan kelancaran produksi dan mempertahankan kualitas produk kita. Teruslah bersemangat dan semoga penjualan semakin meningkat!</p>
                             </div>
                         </div>
                         <div class="card">
