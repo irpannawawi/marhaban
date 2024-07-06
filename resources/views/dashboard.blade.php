@@ -12,10 +12,13 @@
                     <div class="col-6">
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h3>Saran AI</h3>
+                                <h3 class="float-start">Saran AI</h3>
+                                <div class="float-end mt-2">
+                                    <a href="{{route('generate_advice')}}" class="btn btn-primary">Generate</a>
+                                </div>
                             </div>
                             <div class="card-body">
-                                <p>Penjualan Anda terlihat bagus belakangan ini. Tingkatkan stok bahan baku terigu sebesar 20% dan gula sebesar 30%. Penggunaan stok meningkat, jadi pastikan persediaan cukup untuk memenuhi permintaan yang terus bertambah. Dengan langkah ini, kita dapat memastikan kelancaran produksi dan mempertahankan kualitas produk kita. Teruslah bersemangat dan semoga penjualan semakin meningkat!</p>
+                                <p>{{$gpt_response==null?'Belum ada saran':$gpt_response}}</p>
                             </div>
                         </div>
                         <div class="card">

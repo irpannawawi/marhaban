@@ -22,6 +22,7 @@ return new class extends Migration
         DB::table('pengaturans')->insert([
             ['key'=> 'gpt-key','value'=> '',],
             ['key'=> 'gpt-version','value'=> ''],
+            ['key'=> 'gpt-prompt','value'=> '',],
             ['key'=> 'nama_toko','value'=> '',],
             ['key'=> 'alamat_toko','value'=> '',],
             ['key'=> 'kontak_toko','value'=> '',],

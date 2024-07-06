@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AiController;
 use App\Http\Controllers\BahanController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\ProdukController;
@@ -13,12 +15,11 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/generate_advice', [AiController::class, 'generate'])->name('generate_advice');
     // Database view 
     Route::get('/database', [DatabaseController::class, 'index'])->name('database');
     
