@@ -23,18 +23,18 @@
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('bahan.index')" :active="request()->routeIs('bahan.index')">
+                    <x-nav-link :href="route('trbahan.index')" :active="request()->routeIs('trbahan.index')">
                         {{ __('Transaksi Bahan Baku') }}
                     </x-nav-link>
                 </div>
                 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('trproduk.index')" :active="request()->routeIs('trproduk.*')">
                         {{ __('Transaksi Produk') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('pengaturan.index')" :active="request()->routeIs('pengaturan.index')">
                         {{ __('Pengaturan') }}
                     </x-nav-link>
                 </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('deskripsi');
             $table->string('harga');
             $table->integer('stok');
+            $table->string('satuan');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('produks');
+        Schema::dropIfExists('produk');
     }
 };

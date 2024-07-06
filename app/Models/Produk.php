@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Produk extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['nama', 'deskripsi', 'stok'];
+    protected $table = "produk";
+    protected $primaryKey = "id_produk";
+    protected $fillable = [
+        'nama',
+        'deskripsi',
+        'harga',
+        'stok',
+        'satuan',
+    ];
 }

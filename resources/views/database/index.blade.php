@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table class="table">
+                                <table class="table datatable table-sm table-hover table-striped">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -36,16 +36,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
                                         @foreach ($bahans as $bahan)
                                             <tr>
-                                                <td>{{ $bahan->id }}</td>
+                                                <td class="text-center">{{ $no++ }}</td>
                                                 <td>{{ $bahan->nama_bahan }}</td>
-                                                <td>{{ $bahan->stok_bahan }}</td>
-                                                <td>{{ $bahan->satuan_bahan }}</td>
-                                                <td>
-                                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                                    <a href="{{ route('bahan.destroy', ['id'=>$bahan->id_bahan]) }}"
-                                                        class="btn btn-sm btn-danger">Delete</a>
+                                                <td class="text-center">{{ $bahan->stok_bahan }}</td>
+                                                <td class="text-center">{{ $bahan->satuan_bahan }}</td>
+                                                <td class="text-right">
+                                                    <form action="{{ route('bahan.destroy', ['bahan' => $bahan]) }}"
+                                                        method="post" class="d-inline">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <div class="btn-group">
+                                                            <a href="{{ route('bahan.edit', ['bahan' => $bahan]) }}"
+                                                                class="btn btn-sm btn-warning">Edit</a>
+                                                            <button
+                                                                href="{{ route('bahan.destroy', ['bahan' => $bahan]) }}"
+                                                                class="btn btn-sm btn-danger" type="submit"
+                                                                onclick="return confirm('Hapus Bahan Baku?')">Delete</button>
+                                                        </div>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -75,11 +88,40 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Nama Produk</th>
+                                            <th>Deskripsi</th>
                                             <th>Stok</th>
-                                            <th>Satuan</th>
+                                            <th>Harga</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        @php
+                                            $no = 1;
+                                        @endphp
+                                        @foreach ($produks as $produk)
+                                            <tr>
+                                                <td class="text-center">{{ $no++ }}</td>
+                                                <td>{{ $produk->nama }}</td>
+                                                <td>{{ $produk->deskripsi }}</td>
+                                                <td class="text-center">{{ $produk->stok . ' ' . $produk->satuan }}</td>
+                                                <td class="text-center">Rp. {{ number_format($produk->harga, '0', ',', '.') }},-</td>
+                                                <td class="text-right">
+                                                    <form action="{{ route('produk.destroy', ['produk' => $produk->id_produk]) }}" method="post">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <div class="btn-group">
+                                                            <a href="{{ route('produk.edit', ['produk' => $produk->id_produk]) }}"
+                                                                class="btn btn-sm btn-warning">Edit</a>
+                                                            <button
+                                                                href="{{ route('produk.destroy', ['produk' => $produk->id_produk]) }}"
+                                                                class="btn btn-sm btn-danger" type="submit"
+                                                                onclick="return confirm('Hapus Produk?')">Delete</button>
+                                                        </div>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -91,43 +133,9 @@
 
 
     {{-- Modals --}}
+    @include('database.components.add_bahan_baku')
+    @include('database.components.add_produk')
 
-    {{-- add bahan baku --}}
-    <div class="modal fade" id="modalAddBahanBaku" tabindex="-1" role="dialog"
-        aria-labelledby="modalAddBahanBakuLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAddBahanBakuLabel">Tambah Bahan Baku</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="{{ route('bahan.store') }}" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nama_bahan">Nama Bahan</label>
-                            <input type="text" class="form-control" id="nama_bahan" name="nama_bahan">
-                        </div>
-                        <div class="form-group">
-                            <label for="stok_bahan">Stok Bahan</label>
-                            <input type="number" class="form-control" id="stok_bahan" name="stok_bahan">
-                        </div>
-                        <div class="form-group">
-                            <label for="satuan_bahan">Satuan Bahan</label>
-                            <input type="text" class="form-control" id="satuan_bahan" name="satuan_bahan">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-                </form>
 
-            </div>
-        </div>
-    </div>
-    {{-- ./add bahan baku --}}
 
 </x-app-layout>
