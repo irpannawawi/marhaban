@@ -60,6 +60,7 @@ class ProdukController extends Controller
     { 
         
         $produk = Produk::find($id);
+        TrProduk::where('id_produk', $id)->delete();
         $produk->delete();
         return redirect()->route('database')->with('success', 'Data berhasil dihapus');
     }
