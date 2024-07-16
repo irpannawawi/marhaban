@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="row">
-                    <div class="col">
+                    <div class="col-lg-6 col-md-6 mb-3">
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex flex-row justify-content-between">
@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-lg-6 col-md-6 mb-3">
                         <div class="card">
                             <div class="card-header">
                                 <div class="d-flex flex-row justify-content-between">
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table class="table">
+                                <table class="table datatable">
                                     <thead>
                                         <tr>
                                             <th>#</th>

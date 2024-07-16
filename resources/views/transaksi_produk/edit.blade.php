@@ -24,7 +24,7 @@
                         
                         <div class="form-group mb-3">
                             <label for="tgl_transaksi">Tanggal</label>
-                            <input type="text" value="{{ \Illuminate\Support\Carbon::parse($transaksi->tgl_transaksi)->format('Y-m-d') }}" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
+                            <input type="text" value="{{ \Illuminate\Support\Carbon::parse($transaksi->tgl_transaksi)->format('Y-m-d H:i:s') }}" class="form-control" id="tgl_transaksi" name="tgl_transaksi">
                         </div>
 
                         <div class="form-group mb-3">

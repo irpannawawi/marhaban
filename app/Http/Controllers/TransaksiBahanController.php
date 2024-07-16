@@ -12,7 +12,7 @@ class TransaksiBahanController extends Controller
 {
     public function index()
     {
-        $transaksis = TrBahan::all()->sortByDesc('id');
+        $transaksis = TrBahan::all()->sortByDesc('tgl_transaksi');
         $bahans = Bahan::all();
         return view('transaksi_bahan.index', compact(['transaksis', 'bahans']));
     }

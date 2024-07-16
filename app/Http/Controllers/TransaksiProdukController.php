@@ -12,7 +12,7 @@ class TransaksiProdukController extends Controller
 {
     public function index()
     {
-        $transaksis = TrProduk::all()->sortByDesc('id');
+        $transaksis = TrProduk::all()->sortByDesc('tgl_transaksi');
         $produks = Produk::all();
         return view('transaksi_produk.index', compact(['transaksis', 'produks']));
     }
