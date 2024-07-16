@@ -37,6 +37,7 @@
                                 <option {{ $transaksi->jenis=='masuk'?'selected':'disabled' }} value="masuk">Masuk</option>
                                 <option {{ $transaksi->jenis=='keluar'?'selected':'disabled' }} value="keluar">Keluar</option>
                             </select>
+                            <input type="hidden" name="jenis" id="" value="{{ $transaksi->jenis }}">
                         </div>
 
                         <a href="{{ route('trproduk.index') }}" class="btn btn-secondary"  >Close</a>

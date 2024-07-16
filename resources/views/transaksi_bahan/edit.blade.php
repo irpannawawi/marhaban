@@ -15,6 +15,7 @@
                         <div class="form-group mb-3">
                             <label for="nama_bahan">Nama Bahan</label>
                             <input class="form-control" value="{{ $transaksi->bahan->nama_bahan }}" disabled/>
+                            <input type="hidden" name="id_bahan" value="{{ $transaksi->id_bahan }}" />
                         </div>
                         
                         <div class="form-group mb-3">
@@ -28,10 +29,8 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="satuan_bahan">Jenis Tansaksi</label>
-                            <select disabled class="form-control" name="jenis" id="">
-                                <option {{ $transaksi->jenis=='masuk'?'selected':'disabled' }} value="masuk">Masuk</option>
-                                <option {{ $transaksi->jenis=='keluar'?'selected':'disabled' }} value="keluar">Keluar</option>
-                            </select>
+                            <input disabled class="form-control disabled"value="{{ $transaksi->jenis }}">
+                            <input type="hidden" name="jenis" id="" value="{{ $transaksi->jenis }}">
                         </div>
 
                         <a href="{{ route('trbahan.index') }}" class="btn btn-secondary"  >Close</a>
