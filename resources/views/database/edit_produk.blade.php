@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label for="stok">Stok</label>
-                                <input type="number" class="form-control" id="stok" name="stok"
+                                <input type="number" disabled class="form-control" id="stok" name="stok"
                                     placeholder="Stok Produk" value="{{ $produk->stok }}" autocomplete="off" readonly required>
                             </div>
                             <div class="form-group mb-2">

@@ -14,11 +14,7 @@
                         @method('PATCH')
                         <div class="form-group mb-3">
                             <label for="nama_bahan">Nama Bahan</label>
-                            <select class="form-control" name="id_bahan">
-                                @foreach ($bahans as $bahan)
-                                    <option {{$transaksi->id_bahan == $bahan->id_bahan ? 'selected':''}} value="{{ $bahan->id_bahan }}">{{ $bahan->nama_bahan }}</option>
-                                @endforeach
-                            </select>
+                            <input class="form-control" value="{{ $transaksi->bahan->nama_bahan }}" disabled/>
                         </div>
                         
                         <div class="form-group mb-3">
@@ -32,7 +28,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="satuan_bahan">Jenis Tansaksi</label>
-                            <select class="form-control" name="jenis" id="">
+                            <select disabled class="form-control" name="jenis" id="">
                                 <option {{ $transaksi->jenis=='masuk'?'selected':'disabled' }} value="masuk">Masuk</option>
                                 <option {{ $transaksi->jenis=='keluar'?'selected':'disabled' }} value="keluar">Keluar</option>
                             </select>

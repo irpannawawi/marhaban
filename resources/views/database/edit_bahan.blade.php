@@ -22,7 +22,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="stok_bahan">Stok Bahan</label>
-                                <input type="number" class="form-control" id="edit_stok_bahan" value="{{ $bahan->stok_bahan }}" name="stok_bahan" readonly  required>
+                                <input type="number" disabled class="form-control" id="edit_stok_bahan" value="{{ $bahan->stok_bahan }}" name="stok_bahan" readonly  required>
                             </div>
                             <div class="form-group">
                                 <label for="satuan_bahan">Satuan Bahan</label>

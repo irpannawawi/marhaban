@@ -15,7 +15,7 @@
                         <div class="form-group mb-3">
                             <label for="id_produk">Nama Produk</label>
                             <input type="hiden" name="id_produk" value="{{ $transaksi->id_produk }}">
-                            <select class="form-control" name="id_produk" disabled>
+                            <select disabled class="form-control" name="id_produk" disabled>
                                 @foreach ($produks as $produk)
                                     <option {{$transaksi->id_produk == $produk->id_produk ? 'selected':''}} value="{{ $produk->id_produk }}">{{ $produk->nama }}</option>
                                 @endforeach
@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="satuan_bahan">Jenis Tansaksi</label>
-                            <select class="form-control" name="jenis" id="">
+                            <select disabled class="form-control" name="jenis" id="">
                                 <option {{ $transaksi->jenis=='masuk'?'selected':'disabled' }} value="masuk">Masuk</option>
                                 <option {{ $transaksi->jenis=='keluar'?'selected':'disabled' }} value="keluar">Keluar</option>
                             </select>

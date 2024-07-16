@@ -7,7 +7,6 @@ use App\Models\Pengaturan;
 use App\Models\Produk;
 use App\Models\TrBahan;
 use App\Models\TrProduk;
-use Illuminate\Http\Request;
 use Orhanerday\OpenAi\OpenAi;
 
 class AiController extends Controller
@@ -21,25 +20,26 @@ class AiController extends Controller
             $response = $this->ask(json_encode($data));
             file_put_contents(storage_path('./gpt-response.txt'), $response);
         } catch (\Exception $e) {
+            dd($e->getMessage());
         }
 
         return redirect('dashboard')->with('success', 'Success');
     }
 
-    public function ask($prompt, $temp = 0.8)
+    public function ask($prompt, $temp = 0.7)
     {
         $base_prompt = Pengaturan::where('key', 'gpt-prompt')->first()->value;
         if($base_prompt == ''){
-            $base_prompt = 'Saya adalah asisten toko yang cerdas dan saya di sini untuk membantu Anda menganalisis data transaksi toko Anda. Kirimkan data transaksi Anda dalam format JSON, dan saya akan memberikan analisis serta saran untuk meningkatkan penjualan dan efisiensi operasional toko Anda. Saya akan memberikan anda saran dalam 1 paragraf berisi teks tidak lebih dari 100 kata. 
-';
+            $base_prompt = 'Kamu adalah asisten toko yang cerdas. Tugasmu adalah menganalisis data transaksi toko dalam format JSON, kemudian memberikan analisis serta saran untuk meningkatkan penjualan dan efisiensi operasional. Selain itu, kamu akan merekomendasikan bahan yang perlu dibeli, jumlahnya, dan produksi yang perlu ditingkatkan. Jawabanmu harus disampaikan dalam satu paragraf yang tidak lebih dari 100 kata, dengan nada deskriptif dan ilmiah. Pastikan jawaban singkat, padat, dan jelas.';
+            
         }
         
         $model = 'gpt-3.5-turbo';
         if(Pengaturan::where('key', 'gpt-version')->first()->value != null){
             $model = Pengaturan::where('key', 'gpt-version')->first()->value;
         }
-
         $ai = new OpenAi(Pengaturan::where('key', 'gpt-key')->first()->value);
+
         $chat = $ai->chat([
             'model' => $model,
             'messages' => [
@@ -55,9 +55,7 @@ class AiController extends Controller
 
             ],
             'temperature' => $temp,
-            'max_tokens' => 4000,
-            'frequency_penalty' => 0,
-            'presence_penalty' => 0,
+            'max_tokens' => 3000,
         ]);
         return json_decode($chat)->choices[0]->message->content;
     }

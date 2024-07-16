@@ -57,8 +57,7 @@ class ProdukController extends Controller
     }
 
     public function destroy($id)
-    { 
-        
+    {
         $produk = Produk::find($id);
         TrProduk::where('id_produk', $id)->delete();
         $produk->delete();
