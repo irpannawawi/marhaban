@@ -20,7 +20,9 @@
                                     </div>
                                     <div class="p-1">
                                         <button class="btn btn-primary btn-sm " data-bs-toggle="modal"
-                                            data-bs-target="#modalAddTransaksi">Tambah</button>
+                                            data-bs-target="#modalAddTransaksi">Masuk</button>
+                                            <button class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                                data-bs-target="#modalAddTransaksi">Keluar</button>
                                     </div>
                                 </div>
                             </div>

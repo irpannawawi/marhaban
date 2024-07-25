@@ -35,7 +35,21 @@ class TransaksiProdukController extends Controller
         if($request->jenis == "masuk"){
             Produk::find($request->id_produk)->update(['stok' => Produk::find($request->id_produk)->stok + $request->qty]);
         }else{
-            Produk::find($request->id_produk)->update(['stok' => Produk::find($request->id_produk)->stok - $request->qty]);
+            $produk = TrProduk::where([
+                ['id_produk', '=', $request->id_produk],
+                ['tgl_transaksi', '>=', Carbon::now()->subMonths(2)],
+                ['jenis', '=', 'keluar'],
+            ]);
+            $trx_sum = $produk->sum('qty');
+            $trx_count = $produk->count();
+            $max_sold = $produk->get()->max('qty');
+            $buffer = ($max_sold - ($trx_sum / $trx_count) ) * 2;
+
+            Produk::where('id_produk', $request->id_produk)->update([
+                'stok' => Produk::find($request->id_produk)->stok - $request->qty,
+                'buffer' => ceil($buffer)
+            ]);
+
         }
         DB::commit();
         return redirect()->route('trproduk.index');

@@ -35,7 +35,21 @@ class TransaksiBahanController extends Controller
         if($request->jenis == "masuk"){
             Bahan::find($request->id_bahan)->update(['stok_bahan' => Bahan::find($request->id_bahan)->stok_bahan + $request->qty]);
         }else{
-            Bahan::find($request->id_bahan)->update(['stok_bahan' => Bahan::find($request->id_bahan)->stok_bahan - $request->qty]);
+            $bahan = TrBahan::where([
+                ['id_bahan', '=', $request->id_bahan],
+                ['tgl_transaksi', '>=', Carbon::now()->subMonths(2)],
+                ['jenis', '=', 'keluar'],
+            ]);
+            $trx_sum = $bahan->sum('qty');
+            $trx_count = $bahan->count();
+            $max_sold = $bahan->get()->max('qty');
+            $buffer = ceil( ($max_sold - ($trx_sum / $trx_count) ) * 2);
+
+
+            Bahan::where('id_bahan', $request->id_bahan)->update([
+                'stok_bahan' => Bahan::find($request->id_bahan)->stok_bahan - $request->qty,
+                'buffer_bahan' => $buffer
+            ]);
         }
         DB::commit();
         return redirect()->route('trbahan.index');
