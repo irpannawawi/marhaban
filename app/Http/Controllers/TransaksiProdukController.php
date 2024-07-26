@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class TransaksiProdukController extends Controller
 {
+
     public function index()
     {
         $transaksis = TrProduk::all()->sortByDesc('tgl_transaksi');
@@ -52,7 +53,13 @@ class TransaksiProdukController extends Controller
 
         }
         DB::commit();
-        return redirect()->route('trproduk.index');
+        $msg = [
+            'message' => 'Data Berhasilsukses Disimpan',
+            'jenis' => $request->jenis,
+            'id'=> $transaksi->id
+        ];
+        $print = True;
+        return redirect()->route('trproduk.index')->with('msg', $msg)->with('print', $print);
     }
 
     public function edit($id)
@@ -88,6 +95,10 @@ class TransaksiProdukController extends Controller
         return redirect()->route('trproduk.index');
     }
 
+    public function print($id){
+        $transaksi = TrProduk::findorfail($id);
+        return view('transaksi_produk.print', compact('transaksi'));
+    }
     public function destroy($id)
     {
         DB::beginTransaction();

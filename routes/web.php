@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     
     // transaksi Produk
     Route::resource('/trproduk', TransaksiProdukController::class)->middleware('role:admin|staf_produk');
+    Route::get('/trproduk/print/{id}', [TransaksiProdukController::class, 'print'])->name('trproduk.print')->middleware('role:admin|staf_produk');
     
     Route::resource('/pengaturan', PengaturanController::class)->middleware('role:admin');
     

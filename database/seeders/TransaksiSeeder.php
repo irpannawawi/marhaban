@@ -34,6 +34,8 @@ class TransaksiSeeder extends Seeder
                     'created_at' => $faker->dateTimeThisMonth(),
                     'updated_at' => Carbon::now()
                 ];
+
+                Produk::where('id_produk', $p->id_produk)->update(['stok' => $p->stok - $transaksiProduk[$i]['qty']]);
             }
         }
 

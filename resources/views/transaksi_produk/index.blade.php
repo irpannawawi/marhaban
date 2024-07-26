@@ -19,10 +19,12 @@
                                         </h3>
                                     </div>
                                     <div class="p-1">
-                                        <button class="btn btn-primary btn-sm " data-bs-toggle="modal"
-                                            data-bs-target="#modalAddTransaksi">Masuk</button>
-                                            <button class="btn btn-primary btn-sm " data-bs-toggle="modal"
-                                                data-bs-target="#modalAddTransaksi">Keluar</button>
+                                        <button class="btn mx-3 btn-warning btn-sm " data-bs-toggle="modal"
+                                            data-bs-target="#modalAddTransaksiMasuk">Masuk</button>
+
+                                        <button class="btn btn-success btn-sm " data-bs-toggle="modal"
+                                            data-bs-target="#modalAddTransaksiJual">Jual <i
+                                                class="fa fa-dollar"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -52,13 +54,22 @@
                                                     <i
                                                         class="fa fa-arrow-{{ $transaksi->jenis == 'masuk' ? 'down' : 'up' }} "></i>
                                                 </td>
-                                                <td>
-                                                    <form action="{{ route('trproduk.destroy', ['trproduk' => $transaksi]) }}" method="post">
+                                                <td class="text-end">
+                                                    <form
+                                                        action="{{ route('trproduk.destroy', ['trproduk' => $transaksi]) }}"
+                                                        method="post">
                                                         @csrf
                                                         @method('delete')
                                                         <div class="btn-group">
-                                                            <a href="{{ route('trproduk.edit', ['trproduk' => $transaksi]) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                            @if ($transaksi->jenis == 'keluar')
+                                                                
+                                                            <button type="button" class="btn btn-sm btn-info"
+                                                            onclick="print_trx('{{ $transaksi->id }}')">Print</button>
+                                                            @endif
+                                                            <a href="{{ route('trproduk.edit', ['trproduk' => $transaksi]) }}"
+                                                                class="btn btn-sm btn-warning">Edit</a>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-danger">Delete</button>
                                                         </div>
                                                     </form>
                                                 </td>
@@ -77,8 +88,8 @@
 
     {{-- Modals --}}
 
-    {{-- add bahan baku --}}
-    <div class="modal fade" id="modalAddTransaksi" tabindex="-1" role="dialog"
+    {{-- add trx masuk --}}
+    <div class="modal fade" id="modalAddTransaksiMasuk" tabindex="-1" role="dialog"
         aria-labelledby="modalAddTransaksiLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -90,25 +101,20 @@
                 </div>
                 <form action="{{ route('trproduk.store') }}" method="post">
                     @csrf
+                    <input type="hidden" name="jenis" value="masuk">
                     <div class="modal-body">
                         <div class="form-group mb-3">
                             <label for="nama_bahan">Nama Produk</label>
                             <select class="form-control" name="id_produk">
                                 @foreach ($produks as $produk)
-                                    <option value="{{ $produk->id_produk }}">{{ $produk->nama }} ({{ $produk->stok }})</option>
+                                    <option value="{{ $produk->id_produk }}">{{ $produk->nama }}
+                                        ({{ $produk->stok }})</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group mb-3">
                             <label for="qty">Jumlah</label>
                             <input type="number" class="form-control" id="qty" name="qty">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="satuan_bahan">Jenis Tansaksi</label>
-                            <select class="form-control" name="jenis" id="">
-                                <option value="masuk">Masuk</option>
-                                <option value="keluar">Keluar</option>
-                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -120,6 +126,55 @@
             </div>
         </div>
     </div>
-    {{-- ./add bahan baku --}}
+    {{-- ./add trx masuk --}}
 
+
+    {{-- add trx jual --}}
+    <div class="modal fade" id="modalAddTransaksiJual" tabindex="-1" role="dialog"
+        aria-labelledby="modalAddTransaksiLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAddTransaksiLabel">Tambah Transaksi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('trproduk.store') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="jenis" value="keluar">
+                    <div class="modal-body">
+                        <div class="form-group mb-3">
+                            <label for="nama_bahan">Nama Produk</label>
+                            <select class="form-control" name="id_produk">
+                                @foreach ($produks as $produk)
+                                    <option value="{{ $produk->id_produk }}">{{ $produk->nama }}
+                                        ({{ $produk->stok }})</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="qty">Jumlah</label>
+                            <input type="number" class="form-control" id="qty" name="qty">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    {{-- ./add trx jual --}}
+    <script>
+        function print_trx(id) {
+            window.open("{{ url('trproduk/print/') }}/" + id, "Print", "width=600,height=600");
+        }
+
+        @if (session()->has('print'))
+                    print_trx({{ session()->get('msg')['id'] }});
+        @endif
+    </script>
 </x-app-layout>

@@ -1,1 +1,29 @@
-Analisis data transaksi menunjukkan bahwa bahan yang paling sering keluar adalah Garam (id_bahan: 13) dan Coklat (id_bahan: 7). Disarankan untuk meningkatkan stok Garam dan Coklat masing-masing sebesar 20% dari stok saat ini untuk menghindari kekurangan. Produk Bolu Kukus memiliki penjualan yang tinggi dengan stok yang cukup, namun stok Bolu Kijang perlu ditingkatkan karena penjualan cepat dan stok rendah. Meningkatkan stok bahan seperti Tepung, Telur, dan Gula yang digunakan dalam kedua produk juga penting untuk memastikan kelancaran produksi dan penjualan.
+Berdasarkan analisis data transaksi, beberapa bahan menunjukkan penggunaan yang tinggi dan perlu diisi ulang untuk menjaga ketersediaan stok. Bahan seperti Garam, Gula, dan Mentega memiliki stok yang rendah dibandingkan buffer yang disarankan. Produk Bolu Kijang juga menunjukkan stok yang rendah dan perlu ditingkatkan produksinya untuk memenuhi permintaan. Rekomendasi pembelian dan produksi disajikan dalam tabel berikut:
+
+<table class="table table-sm table-bordered table-striped">
+    <tr>
+        <th>No</th>
+        <th>Bahan/Produk</th>
+        <th>Rekomendasi</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Garam</td>
+        <td>Tambahkan 35 kg</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Gula</td>
+        <td>Tambahkan 50 kg</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Mentega</td>
+        <td>Tambahkan 10 kg</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Bolu Kijang</td>
+        <td>Produksi 165 pcs</td>
+    </tr>
+</table>

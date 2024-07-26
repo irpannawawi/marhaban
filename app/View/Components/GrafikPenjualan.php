@@ -8,6 +8,7 @@ use App\Models\TrBahan;
 use App\Models\TrProduk;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Carbon;
 use Illuminate\View\Component;
 
 class GrafikPenjualan extends Component
@@ -37,6 +38,8 @@ class GrafikPenjualan extends Component
         // bahan
         $data['products'] = Produk::all();
         $data['bahans'] = Bahan::all();
+
+        $data['penjualans'] = TrProduk::all()->where('jenis', 'keluar');
         return view('components.grafik-penjualan', $data);
     }
 }

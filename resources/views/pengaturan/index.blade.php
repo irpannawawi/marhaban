@@ -59,6 +59,7 @@
                                     <select class="form-control"  name="value">
                                         <option {{ $pengaturans->where('key', 'gpt-version')->first()->value=='gpt-3.5-turbo'?'selected':'' }} value="gpt-3.5-turbo">gpt-3.5-turbo</option>
                                         <option {{ $pengaturans->where('key', 'gpt-version')->first()->value=='gpt-4o'?'selected':'' }} value="gpt-4o">gpt-4o</option>
+                                        <option {{ $pengaturans->where('key', 'gpt-version')->first()->value=='gpt-4o-mini'?'selected':'' }} value="gpt-4o-mini">gpt-4o mini</option>
                                         <option {{ $pengaturans->where('key', 'gpt-version')->first()->value=='gpt-4'?'selected':'' }} value="gpt-4">gpt-4</option>
                                     </select>
                                     <button type="submit" class="btn btn-primary input-group-text"><i

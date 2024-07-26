@@ -4,7 +4,18 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+<table class="table table-sm table-bordered table-striped">
+    <tr>
+        <th>No</th>
+        <th>Bahan/Produk</th>
+        <th>Rekomendasi</th>
+    </tr>
+    <tr>
+        <td>...</td>
+        <td><label for="" class="form-label">...</label>...</td>
+        <td>...</td>
+    </tr>
+</table>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -22,7 +33,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p>{{ $gpt_response == null ? 'Belum ada saran' : $gpt_response }}</p>
+                                <p>{!! $gpt_response == null ? 'Belum ada saran' : $gpt_response !!}</p>
                             </div>
                         </div>
                         {{-- ./ saran ai --}}
