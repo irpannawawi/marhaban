@@ -53,7 +53,7 @@ class UserController extends Controller
         ]);
         $user = User::findorfail($id);
         if ($request->has('password')) {
-            if ($request->password != $request->password) {
+            if ($request->password === $request->password_confirmation) {
                 $user->password = Hash::make($request->password);
             }
         }
