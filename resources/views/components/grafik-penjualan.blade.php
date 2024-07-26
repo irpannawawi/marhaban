@@ -37,10 +37,10 @@
                             <tr class="text-center">
                                 <td>{{ $loop->iteration }}</td>
                                 <td class="text-end">{{ $penjualan->tgl_transaksi }}</td>
-                                <td >{{ $penjualan->produk->nama }}</td>
-                                <td>{{ number_format($penjualan->qty, 0, ',', '.') }}</td>
-                                <td>Rp. {{ number_format($penjualan->produk->harga, 0, ',', '.') }},-</td>
-                                <td>Rp. {{ number_format($penjualan->produk->harga * $penjualan->qty, 0, ',', '.') }},-</td>
+                                <td>{{ $penjualan->produk->nama }}</td>
+                                <td class="text-center">{{ number_format($penjualan->qty, 0, ',', '.') }}</td>
+                                <td class="text-end">Rp. {{ number_format($penjualan->produk->harga, 0, ',', '.') }},-</td>
+                                <td class="text-end">Rp. {{ number_format($penjualan->produk->harga * $penjualan->qty, 0, ',', '.') }},-</td>
                             </tr>
                         @endforeach
                     </tbody>

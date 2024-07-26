@@ -48,7 +48,6 @@ class ProdukController extends Controller
             'nama' => 'required',
             'deskripsi' => 'required',
             'harga' => 'required',
-            'stok' => 'required',
         ]);
 
         $produk = Produk::find($id);

@@ -39,7 +39,7 @@ class GrafikPenjualan extends Component
         $data['products'] = Produk::all();
         $data['bahans'] = Bahan::all();
 
-        $data['penjualans'] = TrProduk::all()->where('jenis', 'keluar');
+        $data['penjualans'] = TrProduk::all()->where('jenis', 'keluar')->sortByDesc('tgl_transaksi');
         return view('components.grafik-penjualan', $data);
     }
 }
