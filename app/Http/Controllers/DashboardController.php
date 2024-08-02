@@ -18,11 +18,15 @@ class DashboardController extends Controller
 
     public function ai_history(Request $request){
         $data = [];
-        $history = HistoryAi::where([
-            ['created_at', '>=', Carbon::parse($request->startDate)->startOfDay()],
-            ['created_at', '<=', Carbon::parse($request->endDate)->endOfDay()],
-        ]);
+        $history = HistoryAi::orderBy('created_at', 'desc');
         
+        if($request->startDate && $request->endDate){
+            $history = $history->whereBetween('created_at', [
+                Carbon::parse($request->startDate)->startOfDay(),
+                Carbon::parse($request->endDate)->endOfDay(),
+            ]);
+        }
+
         $data['gpt_responses'] = $history->get();
         return view('ai_history', $data);
     }
