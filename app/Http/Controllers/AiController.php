@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bahan;
+use App\Models\HistoryAi;
 use App\Models\Pengaturan;
 use App\Models\Produk;
 use App\Models\TrBahan;
@@ -19,7 +20,11 @@ class AiController extends Controller
         $data['trProduk'] = TrProduk::all()->toArray();
         try {
             $response = $this->ask(json_encode($data));
-            file_put_contents(storage_path('./gpt-response.txt'), $response);
+            HistoryAi::create([
+                'response' => $response['chat'], 
+                'model'=>$response['model'],
+                'total_token'=>$response['total_token']
+            ]);
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
@@ -44,7 +49,7 @@ class AiController extends Controller
                         <td>...</td>
                     </tr>
                 </table>
-            .jawaban kamu akan selalu dalam format html';
+            .';
 
         }
 
@@ -71,6 +76,11 @@ class AiController extends Controller
             'temperature' => $temp,
             'max_tokens' => 3000,
         ]);
-        return json_decode($chat)->choices[0]->message->content;
+        $resp = json_decode($chat);
+        return [
+            'chat' => $resp->choices[0]->message->content,
+            'model' => $resp->model,
+            'total_token' =>$resp->usage->total_tokens
+        ];
     }
 }

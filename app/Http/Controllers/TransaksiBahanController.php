@@ -10,9 +10,18 @@ use Illuminate\Support\Facades\DB;
 
 class TransaksiBahanController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $transaksis = TrBahan::all()->sortByDesc('tgl_transaksi');
+        
+        if ($request->startDate != null && $request->endDate != null) {
+            $transaksis = $transaksis->where('tgl_transaksi', '>=', Carbon::parse(request('startDate'))->startOfDay());
+            $transaksis = $transaksis->where('tgl_transaksi', '<=', Carbon::parse(request('endDate'))->endOfDay());
+        }
+        if ($request->type != null && $request->type != 'all') {
+
+            $transaksis = $transaksis->where('jenis', '=', $request->type);
+        }
         $bahans = Bahan::all();
         return view('transaksi_bahan.index', compact(['transaksis', 'bahans']));
     }
@@ -103,5 +112,20 @@ class TransaksiBahanController extends Controller
         $bahan->save();
         DB::commit();
         return redirect()->back();
+    }
+
+    public function print_all(Request $request){
+        $transaksi = TrBahan::all()->sortByDesc('tgl_transaksi');
+        if ($request->startDate != null && $request->endDate != null) {
+            $transaksi = $transaksi->where('tgl_transaksi', '>=', Carbon::parse(request('startDate'))->startOfDay());
+            $transaksi = $transaksi->where('tgl_transaksi', '<=', Carbon::parse(request('endDate'))->endOfDay());
+        }
+        if ($request->type != null && $request->type != 'all') {
+
+            $transaksi = $transaksi->where('jenis', '=', $request->type);
+        }
+        
+        return view('transaksi_bahan.print_all', compact('transaksi'));
+
     }
 }

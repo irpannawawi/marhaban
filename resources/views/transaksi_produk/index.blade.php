@@ -29,6 +29,15 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                                
+                                <div class="row d-flex justify-content-end">
+                                    <div class="col-md-6 float-end">
+                                        <form action="{{ route('trproduk.index') }}">
+                                            @csrf
+                                            <x-filter />
+                                        </form>
+                                    </div>
+                                </div>
                                 <table
                                     class="table table-hover table-striped table-sm table-bordered table-responsive datatable">
                                     <thead class="text-center">
@@ -44,7 +53,7 @@
                                     <tbody>
                                         @foreach ($transaksis as $transaksi)
                                             <tr>
-                                                <td>{{ 1 }}</td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $transaksi->tgl_transaksi }}</td>
                                                 <td>{{ $transaksi->produk->nama }}</td>
                                                 <td>{{ $transaksi->qty . ' ' . $transaksi->produk->satuan }}</td>

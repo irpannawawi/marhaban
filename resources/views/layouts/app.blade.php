@@ -3,9 +3,9 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>{{env('APP_NAME')}}</title><!--begin::Primary Meta Tags-->
+    <title>{{ env('APP_NAME') }}</title><!--begin::Primary Meta Tags-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="title" content="{{env('APP_NAME')}}">
+    <meta name="title" content="{{ env('APP_NAME') }}">
     <meta name="author" content="ColorlibHQ">
     <meta name="description"
         content="AdminLTE is a Free Bootstrap 5 Admin Dashboard, 30 example pages using Vanilla JS.">
@@ -72,12 +72,26 @@
             $('.datatable').DataTable({
                 layout: {
                     topStart: {
-                        buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                        buttons: [{
+                                extend: 'csvHtml5',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4]
+                                }
+                            },
+                            {
+                                extend: 'pdfHtml5',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4]
+                                }
+                            },
+                        ],
+
                     }
                 }
             });
         });
     </script>
+    @stack('scripts')
 </body>
 
 </html>

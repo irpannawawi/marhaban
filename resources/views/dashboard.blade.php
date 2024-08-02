@@ -4,18 +4,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-<table class="table table-sm table-bordered table-striped">
-    <tr>
-        <th>No</th>
-        <th>Bahan/Produk</th>
-        <th>Rekomendasi</th>
-    </tr>
-    <tr>
-        <td>...</td>
-        <td><label for="" class="form-label">...</label>...</td>
-        <td>...</td>
-    </tr>
-</table>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -27,13 +16,33 @@
                                 <h3 class="float-start">Saran AI</h3>
                                 <div class="float-end mt-2">
                                     @if (Auth::user()->role == 'admin')
-                                        
-                                    <a href="{{ route('generate_advice') }}" class="btn btn-primary">Generate</a>
+                                        <a href="{{ route('generate_advice') }}" class="btn btn-primary">Generate</a>
                                     @endif
                                 </div>
                             </div>
                             <div class="card-body">
-                                <p>{!! $gpt_response == null ? 'Belum ada saran' : $gpt_response !!}</p>
+                                <div id="carouselExample" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        @foreach ($gpt_responses as $gpt)
+                                            <div class="carousel-item @if ($loop->first) active @endif">
+                                                <span
+                                                    class="badge text-bg-secondary mb-3">{{ Illuminate\Support\Carbon::parse($gpt->created_at)->diffForHumans() }}</span>
+                                                <p>{!! $gpt->response !!}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a class="float-start text-primary underline" href="{{ route('ai_history') }}">History Ai</a>
+                                <button class="btn btn-primary float-end btn-sm ml-1" type="button"
+                                    data-bs-target="#carouselExample" data-bs-slide="next">
+                                    <span class="">Next</span>
+                                </button>
+                                <button class="btn btn-primary float-end btn-sm ml-1" type="button"
+                                    data-bs-target="#carouselExample" data-bs-slide="prev">
+                                    <span class="">Previous</span>
+                                </button>
                             </div>
                         </div>
                         {{-- ./ saran ai --}}

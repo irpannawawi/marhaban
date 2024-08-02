@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('ai_history', [DashboardController::class, 'ai_history'])->name('ai_history');
 
     Route::get('/generate_advice', [AiController::class, 'generate'])->name('generate_advice')->middleware('role:admin');
     
@@ -31,9 +32,11 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/produk', ProdukController::class)->middleware('role:admin|staf_produk');
 
     // transaksi bahan baku
+    Route::get('/trbahan/print/', [TransaksiBahanController::class, 'print_all'])->name('trbahan.print_all')->middleware('role:admin|staf_bahan');
     Route::resource('/trbahan', TransaksiBahanController::class)->middleware('role:admin|staf_bahan');
     
     // transaksi Produk
+    Route::get('/trproduk/print/', [TransaksiProdukController::class, 'print_all'])->name('trproduk.print_all')->middleware('role:admin|staf_produk');
     Route::resource('/trproduk', TransaksiProdukController::class)->middleware('role:admin|staf_produk');
     Route::get('/trproduk/print/{id}', [TransaksiProdukController::class, 'print'])->name('trproduk.print')->middleware('role:admin|staf_produk');
     

@@ -1,4 +1,4 @@
-Berdasarkan analisis data transaksi, beberapa bahan menunjukkan penggunaan yang tinggi dan perlu diisi ulang untuk menjaga ketersediaan stok. Bahan seperti Garam, Gula, dan Mentega memiliki stok yang rendah dibandingkan buffer yang disarankan. Produk Bolu Kijang juga menunjukkan stok yang rendah dan perlu ditingkatkan produksinya untuk memenuhi permintaan. Rekomendasi pembelian dan produksi disajikan dalam tabel berikut:
+Berdasarkan analisis data transaksi, terlihat bahwa bahan seperti Jahe Merah, Gula, dan Telur mengalami permintaan tinggi, sedangkan stok bahan seperti Pewarna Makanan dan Baking Powder sudah rendah. Untuk meningkatkan efisiensi operasional, disarankan untuk memperbanyak stok bahan yang sering digunakan dan meningkatkan produksi produk yang paling laku, seperti Bolu Kukus. Berikut adalah rekomendasi pembelian bahan dan jumlah yang diperlukan:
 
 <table class="table table-sm table-bordered table-striped">
     <tr>
@@ -8,22 +8,22 @@ Berdasarkan analisis data transaksi, beberapa bahan menunjukkan penggunaan yang 
     </tr>
     <tr>
         <td>1</td>
-        <td>Garam</td>
-        <td>Tambahkan 35 kg</td>
+        <td>Jahe Merah</td>
+        <td>Tambah 20 kg</td>
     </tr>
     <tr>
         <td>2</td>
         <td>Gula</td>
-        <td>Tambahkan 50 kg</td>
+        <td>Tambah 30 kg</td>
     </tr>
     <tr>
         <td>3</td>
-        <td>Mentega</td>
-        <td>Tambahkan 10 kg</td>
+        <td>Pewarna Makanan</td>
+        <td>Tambah 10 liter</td>
     </tr>
     <tr>
         <td>4</td>
-        <td>Bolu Kijang</td>
-        <td>Produksi 165 pcs</td>
+        <td>Baking Powder</td>
+        <td>Tambah 5 kg</td>
     </tr>
 </table>

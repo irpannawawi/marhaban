@@ -11,9 +11,17 @@ use Illuminate\Support\Facades\DB;
 class TransaksiProdukController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
         $transaksis = TrProduk::all()->sortByDesc('tgl_transaksi');
+        if ($request->startDate != null && $request->endDate != null) {
+            $transaksis = $transaksis->where('tgl_transaksi', '>=', Carbon::parse(request('startDate'))->startOfDay());
+            $transaksis = $transaksis->where('tgl_transaksi', '<=', Carbon::parse(request('endDate'))->endOfDay());
+        }
+        if ($request->type != null && $request->type != 'all') {
+
+            $transaksis = $transaksis->where('jenis', '=', $request->type);
+        }
         $produks = Produk::all();
         return view('transaksi_produk.index', compact(['transaksis', 'produks']));
     }
@@ -99,6 +107,21 @@ class TransaksiProdukController extends Controller
         $transaksi = TrProduk::findorfail($id);
         return view('transaksi_produk.print', compact('transaksi'));
     }
+
+
+    public function print_all(Request $request){
+        $transaksi = TrProduk::all()->sortByDesc('tgl_transaksi');
+        if ($request->startDate != null && $request->endDate != null) {
+            $transaksi = $transaksi->where('tgl_transaksi', '>=', Carbon::parse(request('startDate'))->startOfDay());
+            $transaksi = $transaksi->where('tgl_transaksi', '<=', Carbon::parse(request('endDate'))->endOfDay());
+        }
+        if ($request->type != null && $request->type != 'all') {
+
+            $transaksi = $transaksi->where('jenis', '=', $request->type);
+        }
+        return view('transaksi_produk.print_all', compact('transaksi'));
+    }
+    
     public function destroy($id)
     {
         DB::beginTransaction();

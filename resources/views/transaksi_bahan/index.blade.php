@@ -25,45 +25,55 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <table
-                                    class="table table-hover table-striped table-sm table-bordered table-responsive datatable">
-                                    <thead class="text-center">
-                                        <tr>
-                                            <th class="text-center">#</th>
-                                            <th class="text-center">Tanggal</th>
-                                            <th class="text-center">Nama Bahan</th>
-                                            <th class="text-center">Jumlah</th>
-                                            <th class="text-center">Jenis Transaksi</th>
-                                            <th class="text-center">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($transaksis as $transaksi)
+                                <div class="row d-flex justify-content-end">
+                                    <div class="col-md-6 float-end">
+                                        <form action="{{ route('trbahan.index') }}">
+                                            @csrf
+                                            <x-filter />
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-12 table-responsive">
+                                    <table
+                                        class="table table-hover table-striped table-sm table-bordered table-responsive datatable">
+                                        <thead class="text-center">
                                             <tr>
-                                                <td>{{ 1 }}</td>
-                                                <td>{{ $transaksi->tgl_transaksi }}</td>
-                                                <td>{{ $transaksi->bahan->nama_bahan }}</td>
-                                                <td>{{ $transaksi->qty . ' ' . $transaksi->bahan->satuan_bahan }}</td>
-                                                <td
-                                                    class="text-center text-{{ $transaksi->jenis == 'masuk' ? 'success' : 'danger' }}">
-                                                    {{ $transaksi->jenis }}
-                                                    <i
-                                                        class="fa fa-arrow-{{ $transaksi->jenis == 'masuk' ? 'down' : 'up' }} "></i>
-                                                </td>
-                                                <td>
-                                                    <form action="{{ route('trbahan.destroy', ['trbahan' => $transaksi]) }}" method="post">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <div class="btn-group">
-                                                            <a href="{{ route('trbahan.edit', ['trbahan' => $transaksi]) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                                        </div>
-                                                    </form>
-                                                </td>
+                                                <th class="text-center">#</th>
+                                                <th class="text-center">Tanggal</th>
+                                                <th class="text-center">Nama Bahan</th>
+                                                <th class="text-center">Jumlah</th>
+                                                <th class="text-center">Jenis Transaksi</th>
+                                                <th class="text-center">Action</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($transaksis as $transaksi)
+                                                <tr>
+                                                    <td>{{ 1 }}</td>
+                                                    <td>{{ $transaksi->tgl_transaksi }}</td>
+                                                    <td>{{ $transaksi->bahan->nama_bahan }}</td>
+                                                    <td>{{ $transaksi->qty . ' ' . $transaksi->bahan->satuan_bahan }}</td>
+                                                    <td
+                                                        class="text-center text-{{ $transaksi->jenis == 'masuk' ? 'success' : 'danger' }}">
+                                                        {{ $transaksi->jenis }}
+                                                        <i
+                                                            class="fa fa-arrow-{{ $transaksi->jenis == 'masuk' ? 'down' : 'up' }} "></i>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('trbahan.destroy', ['trbahan' => $transaksi]) }}" method="post">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <div class="btn-group">
+                                                                <a href="{{ route('trbahan.edit', ['trbahan' => $transaksi]) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                                            </div>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

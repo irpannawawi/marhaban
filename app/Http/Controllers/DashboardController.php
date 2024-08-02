@@ -2,19 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistoryAi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         // create file if not exits in root directory named gpt-response.txt
-        $file = storage_path('./gpt-response.txt');
-        if (!file_exists($file)) {
-            file_put_contents($file, '');
-        }
-        $data['gpt_response'] = file_get_contents($file);
-
+        
+        $data['gpt_responses'] = HistoryAi::latest()->limit(3)->get();
         return view('dashboard', $data);
+    }
+
+    public function ai_history(Request $request){
+        $data = [];
+        $history = HistoryAi::where([
+            ['created_at', '>=', Carbon::parse($request->startDate)->startOfDay()],
+            ['created_at', '<=', Carbon::parse($request->endDate)->endOfDay()],
+        ]);
+        
+        $data['gpt_responses'] = $history->get();
+        return view('ai_history', $data);
     }
 }
