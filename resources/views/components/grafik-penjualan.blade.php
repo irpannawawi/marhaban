@@ -60,7 +60,7 @@
                         <p>{{ $product['name'] }}</p>
                         @php
                             $curr_val = $product['times'];
-                            $curr_val_prc = ($product['times'] * 100) / $maxProductSold;
+                            $curr_val_prc = ($product['times'] * 100) / $maxProductSold??0;
                         @endphp
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: {{ $curr_val_prc }}%"

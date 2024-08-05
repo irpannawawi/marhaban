@@ -14,9 +14,10 @@ class BahanTest extends TestCase
     public function test_halaman_database_dapat_ditampilkan_authenticated_user()
     {
         $user = User::factory()->create();
-        $response = $this->actingAs($user)->get('/database');
+        $response = $this->actingAs($user)
+        ->get('/database');
         
-        $response->assertOk();
+        $response->assertStatus(200);
     }
     
     public function test_user_dapat_menambahkan_bahan()
@@ -39,9 +40,8 @@ class BahanTest extends TestCase
         $bahan = Bahan::factory()->create();
         $response = $this->actingAs($user)
         ->delete('/bahan', [
-            'id_bahan'=> $bahan->id,
-        ] );
-    
+            'bahan'=> $bahan,
+        ]);
         $response->assertRedirect();
     }
 }

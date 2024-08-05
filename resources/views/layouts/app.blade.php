@@ -33,6 +33,9 @@
 </head>
 
 <body class="font-sans antialiased">
+    {{-- unit test purpose --}}
+    <div style="display: none" id="securePage"></div> 
+    {{-- ./unit test purpose --}}
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation')
 
