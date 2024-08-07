@@ -49,7 +49,7 @@
                                         <tbody>
                                             @foreach ($transaksis as $transaksi)
                                                 <tr>
-                                                    <td>{{ 1 }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $transaksi->tgl_transaksi }}</td>
                                                     <td>{{ $transaksi->bahan->nama_bahan }}</td>
                                                     <td>{{ $transaksi->qty . ' ' . $transaksi->bahan->satuan_bahan }}</td>
