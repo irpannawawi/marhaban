@@ -54,7 +54,7 @@
                                         @foreach ($transaksis as $transaksi)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $transaksi->tgl_transaksi }}</td>
+                                                <td>{{ Illuminate\Support\Carbon::parse($transaksi->tgl_transaksi)->format('Y-m-d') }}</td>
                                                 <td>{{ $transaksi->produk->nama }}</td>
                                                 <td>{{ $transaksi->qty . ' ' . $transaksi->produk->satuan }}</td>
                                                 <td
