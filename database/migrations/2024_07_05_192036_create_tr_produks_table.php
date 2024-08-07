@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('id_produk')->unsigned();
             $table->date('tgl_transaksi')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->integer('qty');
+            $table->float('qty');
             $table->enum('jenis', ['masuk', 'keluar']);
             $table->timestamps();
         });

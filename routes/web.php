@@ -7,6 +7,7 @@ use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SeederController;
 use App\Http\Controllers\TransaksiBahanController;
 use App\Http\Controllers\TransaksiProdukController;
 use App\Http\Controllers\UserController;
@@ -49,4 +50,5 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/seed', [SeederController::class, 'seed'])->name('seed');
 require __DIR__.'/auth.php';

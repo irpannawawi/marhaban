@@ -1,7 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Bahan;
 use App\Models\Produk;
 use App\Models\TrBahan;
@@ -11,12 +12,9 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
-class TransaksiSeeder extends Seeder
+class SeederController extends Controller
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function seed()
     {
         TrProduk::truncate();
         TrBahan::truncate();
@@ -28,9 +26,6 @@ class TransaksiSeeder extends Seeder
                 'Mentega' => 0.1,
                 'Baking Soda' => 0.1,
                 'Vanili' => 0.1,
-                'Pewarna Makanan' => 0.01,
-                'Baking Powder' => 0.01,
-                'Garam' => 0.01
 
             ],
             'Bolu Kijing' => [
@@ -69,8 +64,8 @@ class TransaksiSeeder extends Seeder
                 // produk keluar
                 $this->create_produk($tanggal, $produk->id_produk, $jml-rand(1, 5), "keluar");
             }
-
             // bahan masuk
+            
             foreach ($bahan_keluar as $bahan) {
 
                 $bahan_baku = Bahan::where('nama_bahan', key($bahan))->first();
@@ -82,7 +77,7 @@ class TransaksiSeeder extends Seeder
                     ]);
                 }
                 
-                $jml_masuk = $bahan[key($bahan)] + (rand(1, 5)/10 * $bahan[key($bahan)]);
+                $jml_masuk = $bahan[key($bahan)] + (0.5 * $bahan[key($bahan)]);
                 $this->create_bahan($tanggal, $bahan_baku->id_bahan, $jml_masuk, "masuk");
 
             }
