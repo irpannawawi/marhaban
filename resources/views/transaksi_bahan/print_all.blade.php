@@ -38,7 +38,7 @@
                 </td>
                 <td>
                     <h1 align="center">Laporan Transaksi Bahan Baku<br>
-                        <small>tgl</small></h1>
+                        <small>Tanggal: {{ Illuminate\Support\Carbon::parse(request()->startDate)->format('d M Y') }} - {{ Illuminate\Support\Carbon::parse(request()->endDate)->format('d M Y') }}</small></h1>
                 </td>
             </tr>
 
