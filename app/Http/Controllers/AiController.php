@@ -8,22 +8,48 @@ use App\Models\Pengaturan;
 use App\Models\Produk;
 use App\Models\TrBahan;
 use App\Models\TrProduk;
+use Illuminate\Support\Carbon;
 use Orhanerday\OpenAi\OpenAi;
 
 class AiController extends Controller
 {
     public function generate()
     {
-        $data['trBahan'] = TrBahan::all()->toArray();
         $data['bahan'] = Bahan::all()->toArray();
         $data['produk'] = Produk::all()->toArray();
-        $data['trProduk'] = TrProduk::all()->toArray();
+
+        $data['trBahan'] = TrBahan::all()
+            ->groupBy(function ($date) {
+                $created_at = Carbon::parse($date->tgl_transaksi);
+                $start = $created_at->startOfWeek()->format('d-m-Y');
+                $end = $created_at->endOfWeek()->format('d-m-Y');
+
+                return "{$start} - {$end}";
+            })->map(function ($item) {
+                return $item->groupBy('id_bahan')->map(function($bahan){
+                    return $bahan->sum('qty');
+                })->toJson();
+            })->toArray();
+            $data['trProduk'] = TrProduk::all()->groupBy(function ($date) {
+                $created_at = Carbon::parse($date->tgl_transaksi);
+                $start = $created_at->startOfWeek()->format('d-m-Y');
+                $end = $created_at->endOfWeek()->format('d-m-Y');
+
+            return "{$start} - {$end}";
+        })->map(function ($item) {
+            return $item->groupBy('id_produk')->map(function($produk){
+                return $produk->sum('qty');
+            })->toJson();
+        })->toArray();
+        
+
+
         try {
             $response = $this->ask(json_encode($data));
             HistoryAi::create([
-                'response' => $response['chat'], 
-                'model'=>$response['model'],
-                'total_token'=>$response['total_token']
+                'response' => $response['chat'],
+                'model' => $response['model'],
+                'total_token' => $response['total_token']
             ]);
         } catch (\Exception $e) {
             dd($e->getMessage());
@@ -80,7 +106,7 @@ class AiController extends Controller
         return [
             'chat' => $resp->choices[0]->message->content,
             'model' => $resp->model,
-            'total_token' =>$resp->usage->total_tokens
+            'total_token' => $resp->usage->total_tokens
         ];
     }
 }

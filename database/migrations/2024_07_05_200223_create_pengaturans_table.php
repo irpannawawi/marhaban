@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         DB::table('pengaturans')->insert([
-            ['key'=> 'gpt-key','value'=> '',],
+            ['key'=> 'gpt-key','value'=> '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',],
             ['key'=> 'gpt-version','value'=> ''],
             ['key'=> 'gpt-prompt','value'=> '',],
             ['key'=> 'nama_toko','value'=> '',],
